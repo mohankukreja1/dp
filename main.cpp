@@ -32,6 +32,17 @@ int bottomdp(int n){
     return dp[n];
 }
 
+int ladderrec(int n){
+    if(n==0){
+        return 1;
+    }
+    if(n<0){
+        return 0;
+    }
+
+    return ladderrec(n-1)+ladderrec(n-2)+ladderrec(n-3);
+}
+
 
 int main() {
     int n;
@@ -44,5 +55,6 @@ int main() {
 //    cout<<fibb(n)<<endl;
 //    cout<<fibdp(k,dp)<<endl;
 //    cout<<bottomdp(n)<<endl;
+    cout<<ladderrec(n)<<endl;
     return 0;
 }
