@@ -81,7 +81,30 @@ int coinsneeded(int coins[],int amount,int n){
     }
     return ans;
 }
+int coindp(int coins[],int amount,int n){
+    int * dp=new int[amount+1];
+    for(int i=0;i<=amount;i++){
+        dp[i]=INT_MAX;
+    }
 
+
+
+    dp[0]=0;
+    for(int i=1;i<=amount;i++){
+
+        for(int j=0;j<n;j++){
+            if(coins[j]<=i){
+                int small=dp[i-coins[j]];
+                if(small!=INT_MAX){
+                    dp[i]=min(dp[i],small+1);
+                }
+            }
+        }
+
+
+    }
+    return dp[amount];
+}
 
 int main() {
     int n;
@@ -92,11 +115,13 @@ int main() {
         dp[i]=-1;
     }
     int coins[]={1,7,10};
+    int ind_coins[]={1,2,5,10};
 //    cout<<fibb(n)<<endl;
 //    cout<<fibdp(k,dp)<<endl;
 //    cout<<bottomdp(n)<<endl;
-    cout<<ladderrec(n,3)<<endl;
+    //cout<<ladderrec(n,3)<<endl;
     //cout<<laddertopdown(n,dp)<<endl;
     cout<<coinsneeded(coins,15,3)<<endl;
+    cout<<coindp(ind_coins,39,4);
     return 0;
 }
