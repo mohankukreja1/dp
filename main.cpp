@@ -105,6 +105,18 @@ int coindp(int coins[],int amount,int n){
     }
     return dp[amount];
 }
+int knapsack(int wts[],int prices[],int W,int N){
+    if(W<=0 || N<=0){
+        return 0;
+    }
+    int inc=0;int exc=0;
+
+    if(wts[N-1]<=W){
+        inc=prices[N-1]+knapsack(wts,prices,W-wts[N-1],N-1);
+    }
+    exc=0+knapsack(wts,prices,W,N-1);
+    return max(inc,exc);
+}
 
 int main() {
     int n;
@@ -121,7 +133,12 @@ int main() {
 //    cout<<bottomdp(n)<<endl;
     //cout<<ladderrec(n,3)<<endl;
     //cout<<laddertopdown(n,dp)<<endl;
-    cout<<coinsneeded(coins,15,3)<<endl;
-    cout<<coindp(ind_coins,39,4);
+//    cout<<coinsneeded(coins,15,3)<<endl;
+//    cout<<coindp(ind_coins,39,4);
+    int wts[]={2,7,3,4};
+    int prices[]={5,20,20,10};
+    int W=11;
+    int N=4;
+    cout<<knapsack(wts,prices,W,N);
     return 0;
 }
